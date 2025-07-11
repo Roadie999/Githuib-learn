@@ -1,5 +1,6 @@
 name: Deploy
 on: [push, workflow_dispatch]
+# jobs for steps
 jobs:
   test:
     runs-on: ubuntu-latest
