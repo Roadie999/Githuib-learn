@@ -31,7 +31,7 @@ jobs:
       - name: install Dependencies
         run: npm ci
       - name: Build Project
-        run: npm run Build
+        run: npm run build
       - name: deploy
         run: echo "Deploy Successfull"
          
