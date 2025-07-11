@@ -14,6 +14,13 @@ jobs:
 
 #      - name: print node node-version
 #        run: node -v
+      - name: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Install Dependencies
         run: npm ci
       - name: Run tests
@@ -28,10 +35,17 @@ jobs:
         uses: actions/setup-node@v3.9.1
         with:
           node-version: '20'
+      - name: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: install Dependencies
         run: npm ci
       - name: Build Project
         run: npm run build
       - name: deploy
         run: echo "Deploy Successfull"
-         
+       
