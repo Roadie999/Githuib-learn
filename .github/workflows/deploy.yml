@@ -29,27 +29,44 @@ jobs:
         run: npm ci
       - name: Run tests
         run: npm run test
-  deploy:
+ 
+  build: 
     needs: test
     runs-on: ubuntu-latest
-    steps:
-      - name: Get code 
-        uses: actions/checkout@v4.2.2
-      - name: Install node js
-        uses: actions/setup-node@v3.9.1
-        with:
+    steps: 
+       - name: Get code 
+         uses: actions/checkout@v4.2.2
+       - name: Install node js
+         uses: actions/setup-node@v3.9.1
+         with:
           node-version: '20'
-      - name: cache
-        uses: actions/cache@v4
-        with:
+       - name: cache
+         uses: actions/cache@v4
+         with:
           path: ~/npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - name: install Dependencies
-        run: npm ci
-      - name: Build Project
-        run: npm run build
+       - name: install Dependencies
+         run: npm ci
+       - name: Build Project
+         run: npm run build 
+       - name: Upload Artifact
+         uses: actions/upload-artifact@v4
+         with:
+             name: dist-files
+             path: dist
+        
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+             name: dist-files
+             path: dist
+        
       - name: deploy
         run: echo "Deploy Successfull"
        
