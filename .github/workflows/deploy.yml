@@ -7,7 +7,7 @@ on:
       - '.github/workflows/*' 
       - README.md  
   
-# jobs for steps
+# jobs for steps all for node js app
 jobs:
   test:
     runs-on: ubuntu-latest
