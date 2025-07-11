@@ -7,7 +7,7 @@ jobs:
       - name: get code
         uses: actions/checkout@v4.2.2
       - name: install node jobs
-        uses: actions/setup-node@v4.2.2
+        uses: actions/setup-node@v3.9.1
         with: 
           node-version: '20'
 
